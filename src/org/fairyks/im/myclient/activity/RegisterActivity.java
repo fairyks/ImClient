@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.fairyks.im.myclient.bean.ResponseBean;
 import org.fairyks.im.myclient.bean.User;
+import org.fairyks.im.myclient.util.ActivityUtil;
 import org.fairyks.im.myclient.util.DateUtil;
 import org.fairyks.im.myclient.util.HttpUtil;
 
@@ -72,6 +73,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register);
+		ActivityUtil.addToRegisterList(RegisterActivity.this);
 		nickNameText = (EditText) findViewById(R.id.nickName);
 		registerPasswordText = (EditText) findViewById(R.id.reg_password);
 		registerButton = (Button) findViewById(R.id.register_user_btn);

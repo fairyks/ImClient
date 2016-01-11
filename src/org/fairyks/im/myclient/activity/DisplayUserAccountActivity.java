@@ -3,6 +3,8 @@
  */
 package org.fairyks.im.myclient.activity;
 
+import org.fairyks.im.myclient.util.ActivityUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class DisplayUserAccountActivity extends Activity implements OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.display_user_account);
+		ActivityUtil.addToRegisterList(DisplayUserAccountActivity.this);
 		accountText = (TextView) findViewById(R.id.display_account);
 		StringBuilder builder = new StringBuilder("您的账号为：");
 		builder.append(getIntent().getStringExtra("account"));
@@ -60,6 +63,7 @@ public class DisplayUserAccountActivity extends Activity implements OnClickListe
 			intent.putExtra("isAfterRegister", true);
 			intent.putExtra("account", getIntent().getStringExtra("account"));
 			startActivity(intent);
+//			finish();
 			break;
 
 		default:

@@ -3,6 +3,8 @@
  */
 package org.fairyks.im.myclient.activity;
 
+import org.fairyks.im.myclient.util.ActivityUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
+		ActivityUtil.removeFromRegisterList();
 		nickNameView = (TextView) findViewById(R.id.nick_name);
 		Intent intent = getIntent();
 		nickNameView.setText(intent.getStringExtra("nickName"));

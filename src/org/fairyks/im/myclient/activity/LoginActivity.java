@@ -5,6 +5,7 @@ package org.fairyks.im.myclient.activity;
 
 import org.fairyks.im.myclient.bean.ResponseBean;
 import org.fairyks.im.myclient.bean.User;
+import org.fairyks.im.myclient.util.ActivityUtil;
 import org.fairyks.im.myclient.util.HttpUtil;
 
 import com.google.gson.Gson;
@@ -77,6 +78,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		boolean flag = getIntent().getBooleanExtra("isAfterRegister", false);
 		if (flag) {
 			userName.setText(getIntent().getStringExtra("account"));
+			ActivityUtil.addToRegisterList(LoginActivity.this);
 		}
 	}
 	
