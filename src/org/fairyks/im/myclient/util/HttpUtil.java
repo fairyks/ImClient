@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.google.gson.Gson;
 
+import android.util.Log;
 import cz.msebera.android.httpclient.HttpStatus;
 
 /**
@@ -35,7 +36,8 @@ public class HttpUtil {
 		try{
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
-			StringEntity stringEntity = new StringEntity(params.toString());
+//			httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			StringEntity stringEntity = new StringEntity(params.toString(),"UTF-8");
 			stringEntity.setContentEncoding("UTF-8");
 			stringEntity.setContentType("application/json");
 			httpPost.setEntity(stringEntity);
@@ -46,6 +48,7 @@ public class HttpUtil {
 		}
 		} catch (Exception e) {
 			e.printStackTrace();
+			Log.e("error", e.getMessage());
 		}
 		return response;
 	}

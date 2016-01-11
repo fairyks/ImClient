@@ -7,5 +7,12 @@
     <string name="chat_content_hint">请输入内容</string>
     <string name="received_msg">收到的消息</string>
     <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="user_account">账号</string>
+    <string name="nickName">昵称</string>
+    <string name="password">密码</string>
+    <string name="ensure_password">确认密码</string>
+    <string name="submit_register_info">提交</string>
+    <string name="go_to_login">去登录</string>
 
 </resources>

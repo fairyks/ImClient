@@ -2,7 +2,7 @@ package org.fairyks.im.myclient.adapter;
 
 import java.util.List;
 
-import org.fairyks.im.myclient.R;
+import org.fairyks.im.myclient.activity.R;
 import org.fairyks.im.myclient.bean.Msg;
 
 import android.content.Context;

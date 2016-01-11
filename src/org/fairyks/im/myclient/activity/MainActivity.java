@@ -3,7 +3,6 @@ package org.fairyks.im.myclient.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fairyks.im.myclient.R;
 import org.fairyks.im.myclient.adapter.MsgAdapter;
 import org.fairyks.im.myclient.bean.Msg;
 import org.fairyks.im.myclient.service.CommunicationService;
@@ -18,8 +17,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;

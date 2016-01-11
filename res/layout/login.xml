@@ -1,21 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <RelativeLayout 
+        android:id="@+id/account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip">
+        
+     <TextView
+        android:id="@+id/account_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="15.0dip"
+        android:text="@string/user_account"
+        android:textColor="#ff333333"
+        android:textSize="16.0sp" />
+     
+     <EditText
+        android:id="@+id/username"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@id/account_tip"
+        android:layout_height="45dip"
+        android:layout_marginTop="5.0dip"
+        android:inputType="text" 
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="6.0dip"
+        android:textColor="#ff333333"
+        android:textSize="18.0sp"/>
+
+    </RelativeLayout>
     
-    <TextView 
+     <RelativeLayout 
+        android:id="@+id/pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/account"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip">
+        
+     <TextView
+        android:id="@+id/password_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="15.0dip"
+        android:text="密码"
+        android:textColor="#ff333333"
+        android:textSize="16.0sp" />
+     
+     <EditText
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@id/password_tip"
+        android:layout_height="45dip"
+        android:layout_marginTop="5.0dip"
+        android:inputType="text" 
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="6.0dip"
+        android:textColor="#ff333333"
+        android:textSize="18.0sp"/>
+
+    </RelativeLayout>
+    
+   <!--  <TextView 
         android:id="@+id/showResponse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        /> -->
     
-    <Button
+    <RelativeLayout 
         android:id="@+id/login"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:layout_below="@id/pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+     <LinearLayout 
+         android:layout_width="match_parent"
+    	 android:layout_height="match_parent"
+    	 android:orientation="horizontal"
+    	 >
+        <Button
+	        android:id="@+id/login_btn"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:text="@string/login"
+	        android:layout_weight="1"
         />
-
-</LinearLayout>
+        <Button
+	        android:id="@+id/register_btn"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:text="@string/register"
+	         android:layout_weight="1"
+        />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

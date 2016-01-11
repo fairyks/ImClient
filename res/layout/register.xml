@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    
+    <RelativeLayout 
+        android:id="@+id/nick_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+        
+       <TextView
+        android:id="@+id/nickName_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="15.0dip"
+        android:text="@string/nickName"
+        android:textColor="#ff333333"
+        android:textSize="16.0sp" />
+     
+     <EditText
+        android:id="@+id/nickName"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@id/nickName_tip"
+        android:layout_height="45dip"
+        android:layout_marginTop="5.0dip"
+        android:inputType="text" 
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="6.0dip"
+        android:textColor="#ff333333"
+        android:textSize="18.0sp"/>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/password_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nick_name_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+        
+       <TextView
+        android:id="@+id/password_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="15.0dip"
+        android:text="@string/password"
+        android:textColor="#ff333333"
+        android:textSize="16.0sp" />
+     
+     <EditText
+        android:id="@+id/reg_password"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@id/password_tip"
+        android:layout_height="45dip"
+        android:layout_marginTop="5.0dip"
+        android:inputType="text" 
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="6.0dip"
+        android:textColor="#ff333333"
+        android:textSize="18.0sp"/>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/ensure_password_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+        
+     <TextView
+        android:id="@+id/ensure_password_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="15.0dip"
+        android:text="@string/ensure_password"
+        android:textColor="#ff333333"
+        android:textSize="16.0sp" />
+     
+     <EditText
+        android:id="@+id/ensure_password"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@id/ensure_password_tip"
+        android:layout_height="45dip"
+        android:layout_marginTop="5.0dip"
+        android:inputType="text" 
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="6.0dip"
+        android:textColor="#ff333333"
+        android:textSize="18.0sp"/>
+    </RelativeLayout>
+    
+     <RelativeLayout 
+        android:id="@+id/register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ensure_password_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+     
+       <Button 
+           android:id="@+id/register_user_btn"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+           android:gravity="center"
+           android:text="@string/submit_register_info"
+           />
+    </RelativeLayout>
+
+</RelativeLayout>
