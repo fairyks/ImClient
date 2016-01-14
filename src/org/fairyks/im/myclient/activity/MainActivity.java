@@ -40,7 +40,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		init();
 		localBroadcastManager = LocalBroadcastManager.getInstance(this);
 //		ConnectionManager.getConnectionManager().setLocalBroadcastManager(localBroadcastManager);
 		ConnectionManager.setLocalBroadcastManager(localBroadcastManager);
@@ -100,11 +99,4 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	/**
-	 * 方法描述 : 初始化环境
-	 */
-	private void init() {
-//		new Thread(new CommunicationService()).start();
-		CommunicationService.getCommunicationService().connect();
-	}
 }

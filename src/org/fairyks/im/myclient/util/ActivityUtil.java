@@ -4,9 +4,11 @@
 package org.fairyks.im.myclient.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Application;
 
 /**
  * <p>Copyright: Copyright (c) 2011</p>
@@ -20,9 +22,9 @@ import android.app.Activity;
  * @author <a href=" ">陈延军</a>
  */
 
-public class ActivityUtil {
+public class ActivityUtil extends Application {
 
-	private static List<Activity> fromRegisterToLoginActivity = new ArrayList<Activity>();
+	private static List<Activity> fromRegisterToLoginActivity = new LinkedList<Activity>();
 
 	/**
 	 * @return the fromRegisterToLoginActivity

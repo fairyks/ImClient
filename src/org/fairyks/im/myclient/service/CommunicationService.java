@@ -5,7 +5,6 @@ package org.fairyks.im.myclient.service;
 
 import org.fairyks.im.myclient.util.GlobalVar;
 
-import android.util.Log;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -27,15 +26,17 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
  * @author <a href=" ">陈延军</a>
  */
 
-public class CommunicationService implements Runnable {
+public class CommunicationService implements Runnable{
 
 	private static Channel channel = null;
 	private static EventLoopGroup group = null;
 	private static  CommunicationService communicationService = null;
 
-	private CommunicationService() {
+	public CommunicationService() {
 	}
-
+/*	private CommunicationService() {
+	}
+*/
 	public static CommunicationService getCommunicationService() {
 		if (communicationService != null) {
 			return communicationService;
@@ -85,13 +86,6 @@ public class CommunicationService implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	//			}).start();
-
-	// If user typed the 'bye' command, wait until the server closes
-	// the connection.
-	//			if ("bye".equals(message.toLowerCase())) {
-	//				channel.closeFuture().sync();
-	//			}
 
 	/**
 	 * <h4>  </h4>
@@ -100,26 +94,26 @@ public class CommunicationService implements Runnable {
 	 */
 	@Override
 	public void run() {
-
 		try {
+			String host = GlobalVar.HOST;
+			int port = GlobalVar.PORT;
 			final SslContext sslContext = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
 			group = new NioEventLoopGroup();
 			Bootstrap bootstrap = new Bootstrap();
 			bootstrap.group(group).channel(NioSocketChannel.class).handler(new ChatClientInitializer(sslContext));
-			channel = bootstrap.connect(GlobalVar.HOST, GlobalVar.PORT).sync().channel();
+			channel = bootstrap.connect(host, port).sync().channel();
+			ConnectionManager.getConnectionManager().setChannel(channel);
+			//			channel = bootstrap.connect(GlobalVar.HOST, GlobalVar.PORT).sync().channel();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.i("bug", e.getMessage().toString());
 		} finally {
-			//			group.shutdownGracefully();
+//			group.shutdownGracefully();
 		}
 	}
 
-	/**
-	 * @param communicationService the communicationService to set
-	 */
-	public void setCommunicationService(CommunicationService communicationService) {
-		this.communicationService = communicationService;
-	}
-	
+	// If user typed the 'bye' command, wait until the server closes
+	// the connection.
+	//			if ("bye".equals(message.toLowerCase())) {
+	//				channel.closeFuture().sync();
+	//			}
 }

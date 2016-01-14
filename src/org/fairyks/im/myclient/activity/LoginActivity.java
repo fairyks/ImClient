@@ -19,6 +19,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
 		userName = (EditText) findViewById(R.id.username);
 		password = (EditText) findViewById(R.id.password);

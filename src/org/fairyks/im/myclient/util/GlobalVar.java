@@ -18,5 +18,5 @@ package org.fairyks.im.myclient.util;
 public class GlobalVar {
 
 	public static final String HOST = System.getProperty("host", "192.168.0.122");
-	public static final int PORT = Integer.parseInt(System.getProperty("port","8992"));
+	public static final int PORT = Integer.parseInt(System.getProperty("port","9888"));
 }
