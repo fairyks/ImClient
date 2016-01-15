@@ -3,7 +3,9 @@
  */
 package org.fairyks.im.myclient.fragment;
 
+import org.fairyks.im.myclient.activity.HomeActivity;
 import org.fairyks.im.myclient.activity.R;
+import org.fairyks.im.myclient.util.Constant;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +38,6 @@ public class MeFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-//		MainActivity.currFragTag = Constant.FRAGMENT_FLAG_SETTING;
+		HomeActivity.currFragTag = Constant.FRAGMENT_FLAG_ME;
 	}	
 }
