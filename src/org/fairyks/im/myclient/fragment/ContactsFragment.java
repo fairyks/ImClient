@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fairyks.im.myclient.activity.HomeActivity;
-import org.fairyks.im.myclient.activity.MainActivity;
 import org.fairyks.im.myclient.activity.R;
 import org.fairyks.im.myclient.adapter.PinyinAdapter;
 import org.fairyks.im.myclient.util.Constant;
@@ -22,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ExpandableListView.OnChildClickListener;
 
 /**
  * <p>Copyright: Copyright (c) 2011</p>
@@ -56,25 +57,24 @@ public class ContactsFragment extends BaseFragment {
 		View contactsLayout = inflater.inflate(R.layout.contacts_layout, container, false);
 		expandableListView = (ExpandableListView) contactsLayout.findViewById(R.id.contact_list);
 		alphabetView = (AlphabetView) contactsLayout.findViewById(R.id.alphabet_list);
-		;
-		names = new ArrayList<String>();
-		names.add("lxz");
-		names.add("A酱");
-		names.add("芙兰");
-		names.add("鱼鱼");
-		names.add("妹妹");
-		names.add("你好");
-		names.add("林小姐");
-		names.add("联盟");
-		names.add("L");
-		names.add("xdsfsdggsdsf");
-		names.add("星星");
-		names.add("靴刀誓死");
-		names.add("Java");
-		names.add("倒塌");
-		names.add("黑人");
-		names.add("a妹");
-		names.add("aYa");
+		names=new ArrayList<String>();
+		names.add("lxz_123");
+		names.add("A酱_6789");
+		names.add("芙兰_12309");
+		names.add("鱼鱼_98765");
+		names.add("妹妹_7683");
+		names.add("你好_4897");
+		names.add("林小姐_98765");
+		names.add("联盟_7653");
+		names.add("L_2187");
+		names.add("xdsfsdggsdsf_98776");
+		names.add("星星_1876");
+		names.add("靴刀誓死_87766");
+		names.add("Java_8765");
+		names.add("倒塌_35421");
+		names.add("黑人_292872");
+		names.add("a妹_38752");
+		names.add("aYa_2282772");
 
 		adapter = new PinyinAdapter(getActivity(), names);
 		expandableListView.setAdapter(adapter);
@@ -83,6 +83,22 @@ public class ContactsFragment extends BaseFragment {
 		for (int i = 0, length = adapter.getGroupCount(); i < length; i++) {
 			expandableListView.expandGroup(i);
 		}
+
+		
+		
+			expandableListView.setOnChildClickListener(new OnChildClickListener() {
+			
+			public boolean onChildClick(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
+//				Intent intent = new Intent(MainActivity.this, PlayActivity.class);
+//				intent.setData(Uri.parse(adapter.getList().get(groupPosition).videos.get(childPosition).url));
+				
+//				Toast.makeText(MainActivity.this, adapter.getChild(groupPosition, childPosition).toString(),Toast.LENGTH_SHORT).show();
+				String userId = adapter.getChild(groupPosition, childPosition).toString();
+				Toast.makeText(getActivity(), userId.substring(userId.indexOf("_")+1),Toast.LENGTH_SHORT).show();
+//				startActivity(intent);
+				return true;
+			}
+		});
 
 		//字母按键回调
 		alphabetView.setOnTouchalphabetListener(new OnTouchalphabetListener() {

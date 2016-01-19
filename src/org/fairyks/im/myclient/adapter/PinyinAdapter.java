@@ -193,6 +193,8 @@ public class PinyinAdapter extends BaseExpandableListAdapter {
 			convertView = inflater.inflate(R.layout.adapter_chat, null);
 		}
 		TextView textView = (TextView) convertView.findViewById(R.id.name);
+		String name = alphabetPinyinList.getHashList().getValueIndex(groupPosition, childPosition);
+		textView.setText(name.substring(0, name.indexOf("_")));
 		textView.setText(alphabetPinyinList.getHashList().getValueIndex(groupPosition, childPosition));
 		return convertView;
 	}
