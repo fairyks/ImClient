@@ -5,6 +5,7 @@ package org.fairyks.im.myclient.activity;
 
 import org.fairyks.im.myclient.fragment.BaseFragment;
 import org.fairyks.im.myclient.service.CommunicationService;
+import org.fairyks.im.myclient.service.ConnectionManager;
 import org.fairyks.im.myclient.ui.BottomControlPanel;
 import org.fairyks.im.myclient.ui.BottomControlPanel.BottomPanelCallback;
 import org.fairyks.im.myclient.ui.HeadControlPanel;
@@ -16,6 +17,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.Window;
 
@@ -33,12 +35,15 @@ import android.view.Window;
 
 public class HomeActivity extends Activity implements BottomPanelCallback {
 
+	
 	BottomControlPanel bottomPanel = null;
 	HeadControlPanel headPanel = null;
 
 	private FragmentManager fragmentManager = null;
 	private FragmentTransaction fragmentTransaction = null;
 
+	private LocalBroadcastManager localBroadcastManager;
+	
 	public static String currFragTag = "";
 
 	@Override
@@ -52,6 +57,10 @@ public class HomeActivity extends Activity implements BottomPanelCallback {
 		setDefaultFirstFragment(Constant.FRAGMENT_FLAG_MESSAGE);
 		
 		initConnection();
+		
+		localBroadcastManager = LocalBroadcastManager.getInstance(this);
+		ConnectionManager.setLocalBroadcastManager(localBroadcastManager);
+		
 		//		nickNameView = (TextView) findViewById(R.id.nick_name);
 		//		Intent intent = getIntent();
 		//		nickNameView.setText(intent.getStringExtra("nickName"));

@@ -4,6 +4,13 @@
 	android:layout_height="fill_parent"
 	android:orientation="vertical">
 
+    <Button 
+        android:id="@+id/addFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_friend"
+        android:gravity="center_horizontal"
+        />
     <RelativeLayout 
 	    android:layout_width="fill_parent"
 		android:layout_height="fill_parent">

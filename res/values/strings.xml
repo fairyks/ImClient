@@ -14,5 +14,8 @@
     <string name="ensure_password">确认密码</string>
     <string name="submit_register_info">提交</string>
     <string name="go_to_login">去登录</string>
+    <string name="add_friend">新的朋友</string>
+    <string name="input_new_friend_number">输入好友号码</string>
+    <string name="search_friend_btn">搜索</string>
 
 </resources>

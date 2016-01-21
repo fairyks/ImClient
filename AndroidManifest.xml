@@ -32,6 +32,7 @@
         <activity android:name=".HomeActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".DisplayUserAccountActivity"/>
+        <activity android:name=".SearchFriendActivity"/>
     </application>
 
 </manifest>

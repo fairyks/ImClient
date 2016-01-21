@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/search_friend_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="10dip"
+        >
+	    <EditText 
+	        android:id="@+id/search_friend_input"
+	        android:layout_height="45dip"
+	        android:layout_width="0dip"
+	        android:layout_weight="4"
+	        android:hint="@string/input_new_friend_number"
+	        />
+	    
+	     <Button 
+            android:id="@+id/search_button"
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/search_friend_btn"
+            />
+    </LinearLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/search_result_view"
+        android:layout_below="@id/search_friend_area"
+        android:layout_marginTop="10dip"
+       	android:layout_width="match_parent"
+       	android:layout_height="wrap_content"
+        >
+    
+        <TextView 
+            android:id="@+id/show_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+       
+        
+    </RelativeLayout>
+    
+
+</RelativeLayout>

@@ -22,6 +22,7 @@ public class Packet {
 	private String from;
 	private String to;
 	private String msgId;
+	
 	/**
 	 * @return the type
 	 */

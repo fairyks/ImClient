@@ -6,6 +6,7 @@ package org.fairyks.im.myclient.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fairyks.im.myclient.activity.SearchFriendActivity;
 import org.fairyks.im.myclient.activity.HomeActivity;
 import org.fairyks.im.myclient.activity.R;
 import org.fairyks.im.myclient.adapter.PinyinAdapter;
@@ -13,11 +14,14 @@ import org.fairyks.im.myclient.util.Constant;
 import org.fairyks.im.myclient.view.AlphabetView;
 import org.fairyks.im.myclient.view.AlphabetView.OnTouchalphabetListener;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -41,6 +45,8 @@ public class ContactsFragment extends BaseFragment {
 	private PinyinAdapter adapter;
 	private ExpandableListView expandableListView;
 	private AlphabetView alphabetView;
+	private Button addFriendButton;
+	private View contactsLayout;
 	private List<String> names;
 
 	/**
@@ -54,9 +60,11 @@ public class ContactsFragment extends BaseFragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View contactsLayout = inflater.inflate(R.layout.contacts_layout, container, false);
+		contactsLayout = inflater.inflate(R.layout.contacts_layout, container, false);
 		expandableListView = (ExpandableListView) contactsLayout.findViewById(R.id.contact_list);
 		alphabetView = (AlphabetView) contactsLayout.findViewById(R.id.alphabet_list);
+		addFriendButton = (Button) contactsLayout.findViewById(R.id.addFriend);
+
 		names=new ArrayList<String>();
 		names.add("lxz_123");
 		names.add("A酱_6789");
@@ -133,9 +141,19 @@ public class ContactsFragment extends BaseFragment {
 			}
 		});
 
+		
+		addFriendButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				Toast.makeText(getActivity(), "add friend", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getActivity(), SearchFriendActivity.class);
+				startActivity(intent);
+			}
+		});
 		return contactsLayout;
 	}
-
+	
 	/**
 	 * <h4>  </h4>
 	 * @see org.fairyks.im.myclient.fragment.BaseFragment#onResume()

@@ -29,4 +29,16 @@ public class Constant {
 		public static final String FRAGMENT_FLAG_FIND = "发现"; 
 		public static final String FRAGMENT_FLAG_ME = "我"; 
 		
+		//消息协议
+		public static final String IQ = "IQ";
+		public static final String IQ_SEARCH_FRIEND = "SEARCHFRIEND";
+		public static final String IQ_ADD_FRIEND = "ADDROSTER";
+		public static final String IQ_DELETE_FRIEND = "DELETEROSTER";
+		public static final String CHAT = "CHAT";
+		public static final String GROUP_CHAT = "GROUPCHAT";
+		public static final String PRESENCE = "PRESENCE";
+		public static final String PRESENCE_ONLINE = "PRESENCEONLINE";
+		public static final String PRESENCE_OFFLINE = "PRESENCEOFFLINE";
+		
+		
 }

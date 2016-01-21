@@ -26,8 +26,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	private LocalReceiver localReceiver;
-	private LocalBroadcastManager localBroadcastManager;
+	private ChatMessageReceiver localReceiver;
+//	private LocalBroadcastManager localBroadcastManager;
 	private IntentFilter intentFilter;
 	private ListView msgListView;
 	private EditText inputText;
@@ -40,9 +40,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		localBroadcastManager = LocalBroadcastManager.getInstance(this);
+//		localBroadcastManager = LocalBroadcastManager.getInstance(this);
 //		ConnectionManager.getConnectionManager().setLocalBroadcastManager(localBroadcastManager);
-		ConnectionManager.setLocalBroadcastManager(localBroadcastManager);
+//		ConnectionManager.setLocalBroadcastManager(localBroadcastManager);
 		
 		adapter = new MsgAdapter(MainActivity.this, R.layout.msg_item, msgList);
 		
@@ -55,9 +55,9 @@ public class MainActivity extends Activity {
 		send.setOnClickListener(new SendMesageListener());
 		
 		intentFilter = new IntentFilter();
-		intentFilter.addAction("org.fairyks.im.myclient.broadcast");
-		localReceiver = new LocalReceiver();
-		localBroadcastManager.registerReceiver(localReceiver, intentFilter);
+		intentFilter.addAction("org.fairyks.chatMsessageBroadcast");
+		localReceiver = new ChatMessageReceiver();
+		ConnectionManager.getLocalBroadcastManager().registerReceiver(localReceiver, intentFilter);
 	}
 
 	
@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
 	}
 
 	
-	class LocalReceiver extends BroadcastReceiver {
+	class ChatMessageReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Msg msg = new Msg(intent.getStringExtra("msg").toString(), Msg.TYPE_RECEIVED);

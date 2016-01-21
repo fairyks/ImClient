@@ -13,9 +13,11 @@ import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,6 +41,9 @@ import android.widget.Toast;
 public class LoginActivity extends Activity implements OnClickListener {
 	
 	public static final int VERIFY_RESULT = 0;
+	private SharedPreferences preferences;
+	private SharedPreferences.Editor editor;
+	
 	private EditText userName;
 	private EditText password;
 	private Button loginButton;
@@ -53,6 +58,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 					Gson gson = new Gson();
 					ResponseBean bean = gson.fromJson(response, ResponseBean.class);
 					if (bean.isFlag()) {
+
+						//记住用户名
+						editor = preferences.edit();
+						editor.putString("localAccount", userName.getText().toString());
+						editor.commit();
 						startHomeActivity(LoginActivity.this, bean.getNickName());
 					}
 				}
@@ -71,6 +81,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
+		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		userName = (EditText) findViewById(R.id.username);
 		password = (EditText) findViewById(R.id.password);
 		loginButton = (Button) findViewById(R.id.login_btn);
