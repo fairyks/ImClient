@@ -3,21 +3,29 @@
  */
 package org.fairyks.im.myclient.activity;
 
+import org.fairyks.im.myclient.bean.Packet;
 import org.fairyks.im.myclient.bean.ResponseBean;
 import org.fairyks.im.myclient.bean.User;
+import org.fairyks.im.myclient.service.CommunicationService;
+import org.fairyks.im.myclient.service.ConnectionManager;
+import org.fairyks.im.myclient.service.SendMessage;
 import org.fairyks.im.myclient.util.ActivityUtil;
+import org.fairyks.im.myclient.util.Constant;
 import org.fairyks.im.myclient.util.HttpUtil;
 
 import com.google.gson.Gson;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,28 +52,23 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private SharedPreferences preferences;
 	private SharedPreferences.Editor editor;
 	
-	private EditText userName;
+	private IntentFilter intentFilter;
+	private LoginReceiver receiver;
+	private LocalBroadcastManager localBroadcastManager;
+	private EditText userNameEditText;
 	private EditText password;
 	private Button loginButton;
 	private Button registerButton;
+	
+	
+	private ResponseBean bean;
+	private String userName;
 	
 	private Handler handler = new Handler(){
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case VERIFY_RESULT:
-				String response = (String) msg.obj;
-				if(response!=null&&!"".equals(response)){
-					Gson gson = new Gson();
-					ResponseBean bean = gson.fromJson(response, ResponseBean.class);
-					if (bean.isFlag()) {
-
-						//记住用户名
-						editor = preferences.edit();
-						editor.putString("localAccount", userName.getText().toString());
-						editor.commit();
-						startHomeActivity(LoginActivity.this, bean.getNickName());
-					}
-				}
+				startHomeActivity(LoginActivity.this, bean.getNickName());
 			}
 		}
 	};
@@ -82,15 +85,24 @@ public class LoginActivity extends Activity implements OnClickListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		userName = (EditText) findViewById(R.id.username);
+		userNameEditText = (EditText) findViewById(R.id.username);
 		password = (EditText) findViewById(R.id.password);
 		loginButton = (Button) findViewById(R.id.login_btn);
 		registerButton = (Button) findViewById(R.id.register_btn);
 		loginButton.setOnClickListener(this);
 		registerButton.setOnClickListener(this);
+		initConnection(); //初始化连接和用户信息绑定的位置，再考虑加到别处
+		intentFilter = new IntentFilter();
+		intentFilter.addAction("org.fairyks.loginBroadcast");
+		
+		localBroadcastManager = LocalBroadcastManager.getInstance(this);
+		ConnectionManager.setLocalBroadcastManager(localBroadcastManager);
+		receiver = new LoginReceiver();
+		ConnectionManager.getLocalBroadcastManager().registerReceiver(receiver, intentFilter);
+		
 		boolean flag = getIntent().getBooleanExtra("isAfterRegister", false);
 		if (flag) {
-			userName.setText(getIntent().getStringExtra("account"));
+			userNameEditText.setText(getIntent().getStringExtra("account"));
 			ActivityUtil.addToRegisterList(LoginActivity.this);
 		}
 	}
@@ -105,10 +117,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.login_btn:
-			if (TextUtils.isEmpty(userName.getText().toString())||TextUtils.isEmpty(password.getText().toString())) {
+			if (TextUtils.isEmpty(userNameEditText.getText().toString())||TextUtils.isEmpty(password.getText().toString())) {
 				Toast.makeText(LoginActivity.this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
 			} else {
-				verifyUser(userName.getText().toString(),password.getText().toString());
+				userName = userNameEditText.getText().toString();
+				verifyUser(userNameEditText.getText().toString(),password.getText().toString());
 			}
 			break;
 		case R.id.register_btn:
@@ -139,15 +152,59 @@ public class LoginActivity extends Activity implements OnClickListener {
 					String params = HttpUtil.toJson(user);
 //					String response = HttpUtil.post("http://127.0.0.1:9999/imServer/userManageAction", params);
 					String response = HttpUtil.post("http://192.168.0.122:9999/imServer/userManageAction", params);
-					Message message = new Message();
-					message.what = VERIFY_RESULT;
-					// 将服务器返回的结果存放到Message中
-					message.obj = response.toString();
-					handler.sendMessage(message);
+//					Message message = new Message();
+//					message.what = VERIFY_RESULT;
+//					// 将服务器返回的结果存放到Message中
+//					message.obj = response.toString();
+					
+					Gson gson = new Gson();
+					bean = gson.fromJson(response, ResponseBean.class);
+					if (bean.isFlag()) {
+						//记住用户名
+						editor = preferences.edit();
+						editor.putString("localAccount", userName);
+						editor.commit();
+						
+						Packet packet = new Packet();
+						packet.setFrom(userName);
+						packet.setType(Constant.PRESENCE_ONLINE);
+						new SendMessage().execute(gson.toJson(packet));
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}).start();
 	}
+	
+	
+	
+	/**
+	 * 方法描述 : 初始化连接
+	 */
+	private void initConnection() {
+	 new Thread(new CommunicationService()).start();
+//		CommunicationService.getCommunicationService().connect();
+	}
+	
+	private class LoginReceiver extends BroadcastReceiver {
+		/**
+		 * <h4>  </h4>
+		 * @param context
+		 * @param intent
+		 * @throws 
+		 */
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			boolean flag = intent.getBooleanExtra("loginEcho", false);
+			if(flag){
+				Message message = new Message();
+				message.what = VERIFY_RESULT;
+				// 将服务器返回的结果存放到Message中
+//				message.obj = response.toString();
+				handler.sendMessage(message);
+			}
+		}
+	}
+	
 }

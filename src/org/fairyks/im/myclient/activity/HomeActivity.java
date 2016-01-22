@@ -56,10 +56,12 @@ public class HomeActivity extends Activity implements BottomPanelCallback {
 		fragmentManager = getFragmentManager();
 		setDefaultFirstFragment(Constant.FRAGMENT_FLAG_MESSAGE);
 		
-		initConnection();
+//		initConnection();
 		
 		localBroadcastManager = LocalBroadcastManager.getInstance(this);
 		ConnectionManager.setLocalBroadcastManager(localBroadcastManager);
+		
+		
 		
 		//		nickNameView = (TextView) findViewById(R.id.nick_name);
 		//		Intent intent = getIntent();

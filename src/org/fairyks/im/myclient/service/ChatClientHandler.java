@@ -39,7 +39,11 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 		//解析message,根据不同类型,发送不同广播
 		Packet packet = gson.fromJson(message, Packet.class);
 		
-		if (packet.getType().equals(Constant.IQ_SEARCH_FRIEND)) {
+		if (packet.getType().equals(Constant.PRESENCE_ONLINE)) {
+			Intent intent = new Intent("org.fairyks.loginBroadcast");
+			intent.putExtra("loginEcho", packet.isLoginFlag());
+			ConnectionManager.getLocalBroadcastManager().sendBroadcast(intent);
+		}else if (packet.getType().equals(Constant.IQ_SEARCH_FRIEND)) {
 			Intent intent = new Intent("org.fairyks.searchFriendInfoBroadcast");
 			intent.putExtra("searchResult", message);
 			ConnectionManager.getLocalBroadcastManager().sendBroadcast(intent);

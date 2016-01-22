@@ -3,7 +3,6 @@
  */
 package org.fairyks.im.myclient.activity;
 
-import org.fairyks.im.myclient.bean.Msg;
 import org.fairyks.im.myclient.bean.Packet;
 import org.fairyks.im.myclient.service.ConnectionManager;
 import org.fairyks.im.myclient.service.SendMessage;
@@ -107,8 +106,7 @@ public class SearchFriendActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	class SearchFriendInfoReceiver extends BroadcastReceiver {
-
+	private class SearchFriendInfoReceiver extends BroadcastReceiver {
 		/**
 		 * <h4> 查询好友结果接收器 </h4>
 		 * @param context

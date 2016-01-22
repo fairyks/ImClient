@@ -3,6 +3,8 @@
  */
 package org.fairyks.im.myclient.bean;
 
+import java.util.List;
+
 /**
  * <p>Copyright: Copyright (c) 2011</p>
  * <p>公司名称 :陈延军 </p>
@@ -22,6 +24,8 @@ public class Packet {
 	private String from;
 	private String to;
 	private String msgId;
+	private List<User> list;
+	private boolean loginFlag;
 	
 	/**
 	 * @return the type
@@ -83,4 +87,29 @@ public class Packet {
 	public void setMsgId(String msgId) {
 		this.msgId = msgId;
 	}
+	/**
+	 * @return the list
+	 */
+	public List<User> getList() {
+		return list;
+	}
+	/**
+	 * @param list the list to set
+	 */
+	public void setList(List<User> list) {
+		this.list = list;
+	}
+	/**
+	 * @return the loginFlag
+	 */
+	public boolean isLoginFlag() {
+		return loginFlag;
+	}
+	/**
+	 * @param loginFlag the loginFlag to set
+	 */
+	public void setLoginFlag(boolean loginFlag) {
+		this.loginFlag = loginFlag;
+	}
+	
 }
